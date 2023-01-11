@@ -49,7 +49,7 @@ class SaverWithCallback:
             intrinsic = o3d.camera.PinholeCameraIntrinsic(
                 o3d.camera.PinholeCameraIntrinsicParameters.PrimeSenseDefault )
             intrinsic.set_intrinsics(
-                width=512, height=512, fx=251.730835, fy=251.734344, cx=259.099640, cy=262.528076)
+                width=1280, height=720, fx=605.805115, fy=605.625549, cx=641.717163, cy=363.225800)
 
             self.point_cloud = o3d.geometry.PointCloud.create_from_rgbd_image(rgbd_image, intrinsic)
 

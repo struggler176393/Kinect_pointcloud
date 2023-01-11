@@ -19,7 +19,8 @@ class Open3dVisualizer():
 		return False
 
 	def update(self, points_3d, rgb_image=None):
-
+		coord_mesh = o3d.geometry.TriangleMesh.create_coordinate_frame(size = 0.06, origin = [0,0,0])
+		# coord_pcd = coord_mesh.compute_point_cloud()
 		# Add values to vectors
 		self.point_cloud.points = o3d.utility.Vector3dVector(points_3d)
 		if rgb_image is not None:
@@ -29,14 +30,16 @@ class Open3dVisualizer():
 		# self.point_cloud = points_3d
 
 		self.point_cloud.transform([[1,0,0,0],[0,-1,0,0],[0,0,-1,0],[0,0,0,1]])
-
+		
 		# Add geometries if it is the first time
 		if not self.o3d_started:
 			self.vis.add_geometry(self.point_cloud)
+			self.vis.add_geometry(coord_mesh)
 			self.o3d_started = True
 
 		else:
 			self.vis.update_geometry(self.point_cloud)
+			self.vis.update_geometry(coord_mesh)
 
 		self.vis.poll_events()
 		self.vis.update_renderer()
